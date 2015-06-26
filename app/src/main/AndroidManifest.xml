@@ -32,7 +32,8 @@
 
         <provider
             android:name=".data.WeatherProvider"
-            android:authorities="com.luismedinaweb.sunshine" />
+            android:authorities="com.luismedinaweb.sunshine"
+            android:exported="false" />
 
     </application>
 
