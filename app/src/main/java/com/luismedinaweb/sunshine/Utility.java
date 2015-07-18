@@ -2,6 +2,8 @@ package com.luismedinaweb.sunshine;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 
@@ -246,4 +248,17 @@ public class Utility {
         }
         return -1;
     }
+
+
+    // Helper method to verify if the user has a valid network connection
+    public static boolean isOnline(Context context) {
+        if (context != null) {
+            ConnectivityManager connMgr = (ConnectivityManager)
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            return (networkInfo != null && networkInfo.isConnectedOrConnecting());
+        }
+        return false;
+    }
+
 }

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.luismedinaweb.sunshine.data.WeatherContract;
 import com.luismedinaweb.sunshine.sync.SunshineSyncAdapter;
@@ -91,10 +92,11 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
             openPreferredLocationInMap();
             return true;
         }
-        if (id == R.id.action_refresh) {
-            updateWeather();
-            return true;
-        }
+
+//        if (id == R.id.action_refresh) {
+//            updateWeather();
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -109,6 +111,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
 
         // Get a reference to the ListView, and attach this adapter to it.
         mListView = (ListView) rootView.findViewById(R.id.listview_forecast);
+        mListView.setEmptyView(rootView.findViewById(R.id.weather_error_textview));
         mListView.setAdapter(mForecastAdapter);
 
         // We'll call our MainActivity
@@ -190,6 +193,21 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         mForecastAdapter.swapCursor(cursor);
         if (mSelectedPosition != ListView.INVALID_POSITION) {
             mListView.smoothScrollToPosition(mSelectedPosition);
+        }
+        updateEmptyView();
+    }
+
+    private void updateEmptyView() {
+        if (mForecastAdapter.getCount() == 0) {
+            View rootview = getView();
+            if (rootview != null) {
+                TextView errorView = (TextView) rootview.findViewById(R.id.weather_error_textview);
+                int message = R.string.empty_forecast_list;
+                if (!Utility.isOnline(getActivity())) {
+                    message = R.string.no_connection;
+                }
+                errorView.setText(message);
+            }
         }
     }
 

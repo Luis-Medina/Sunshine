@@ -16,6 +16,9 @@
     <string name="action_map">Map Location</string>
     <string name="action_share">Share</string>
 
+    <string name="empty_forecast_list">No Weather Information Available.</string>
+    <string name="no_connection">No weather information available. The network is not available to fetch weather data.</string>
+
     <!-- Menu label to fetch updated weather info from the server -->
     <string name="action_refresh" translatable="false">Refresh</string>
     <string name="title_activity_detail">Details</string>

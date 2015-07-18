@@ -2,6 +2,7 @@
   <dictionary name="Luis">
     <words>
       <w>listview</w>
+      <w>rootview</w>
       <w>viewgroup</w>
     </words>
   </dictionary>
